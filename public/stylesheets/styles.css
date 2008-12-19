@@ -1,0 +1,88 @@
+body{
+  font-family:Helvetica, arial, sans-serif;
+  font-style:normal;
+  margin:0px;
+}
+
+em{font-style:normal;}
+
+ol, ul {
+  list-style: none;
+  margin:0px; 
+  padding:10px;
+}
+
+a{
+  color:#D200B6;
+}
+
+.review_list{
+  max-width:800px;
+  margin:auto;
+}
+
+.review{
+  padding :10px;
+  position:relative;
+  min-height:130px;
+  margin-bottom:20px;
+}
+
+.review ul{
+  padding-left:125px;
+}
+
+.review.odd{
+
+}
+
+.review.even{
+/*  border-left:5px solid #B8D0D2;
+  background:#DCF9FC;
+*/}
+
+.title_artist{
+  padding-left:30px;
+  font-weight:bold;
+  padding-bottom:10px;
+}
+
+.review_summary{
+  font-size:13px;
+  line-height:20px;
+  padding-left:30px;
+}
+
+.rating{
+  color:#79E0E6;
+  font-size:46px;
+  font-weight:bold;
+  padding-left:104px;
+  position:absolute;
+  right:4px;
+  top:4px;
+}
+
+.odd .rating{
+  color:#D200B6;
+}
+
+.page_list {
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+  font-size:14px;
+}
+
+.page_list a, .page_list span{
+  padding-left:4px;
+  text-decoration:none;
+  float:left;
+  display:block;
+}
+
+.album_art {
+  position:absolute;
+  top:0px;
+  left:0px;
+}
