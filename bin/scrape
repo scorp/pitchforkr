@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+require 'net/http'
 require 'rubygems'
 require 'open-uri'
 require 'model'
@@ -5,31 +7,33 @@ require 'Hpricot'
 
 BASE_URL = "http://www.pitchforkmedia.com/node/"
 
-def download(cid)
-  url = "#{BASE_URL}#{cid}"
-  puts "downloading #{url}" if cid % 100 == 0
-  doc = Hpricot(open(url))
-  content = get_content(cid, doc)
-  if content
-    save_content(content) 
-  end
-  return true
+def log_exception(e, cid)
+  puts "#{cid} : #{e.class} : #{e.message}"
 end
 
-def acquire_lock(cid)
-  return @lock if @lock
-  @lock = cid
-  return @lock
+def download(cid)
+  begin
+    url = "#{BASE_URL}#{cid}"
+    puts "downloading #{url}" if cid % 100 == 0
+    doc = Hpricot(open(url))
+    content = get_content(cid, doc)
+    if content
+      save_content(content) 
+    end
+  rescue Exception => e
+    log_exception(e, cid)
+  end
 end
 
 def get_content(cid, doc)
   begin
+    return false unless (doc/".rating").first
     full_title = (doc/"h2.fn").first.inner_html.strip
     artist = full_title.split(":").first
     title  = full_title.split(":").last.gsub(/<BR ?\/?>/i,'')
     rating = (doc/".rating").first.inner_html.strip.to_f
     review = (doc/".content.description").first.inner_html
-    image_url = (doc/".url.photo img").first[:src]
+    image_url = (doc/".photo img").first[:src]
     original_doc = doc.to_s
     return {
       :content_id     => cid,
@@ -43,7 +47,7 @@ def get_content(cid, doc)
       :original_doc   => doc.to_s
     }
   rescue Exception => e
-    puts e
+    log_exception(e, cid)
     return false
   end
 end
@@ -53,39 +57,26 @@ def save_content(content)
       puts "saving #{content[:content_id]} : #{content[:artist]} : #{content[:title]} : #{content[:rating]}"
       Review.create(content)
     rescue SQLite3::BusyException => e
-      save_content(content)
+      log_exception(e, cid)
     rescue Exception => e
-      puts e.class + " " + e.message
-    # ensure
-    #   @lock = false
+      log_exception(e, cid)
     end
 end
 
 def download_content
-  content_id = 51800
+  content_id = ARGV[0].to_i || Review.maximum(:id) || 0
   threads = []
   while true
-    
-    if Thread.list.size <= 100
+    if Thread.list.size <= 30
       threads << Thread.new(content_id) do |cid|
-        until download(cid) do
-          begin
-            read_file
-          rescue Exception => e
-            if e.is_a? Errno::EMFILE
-              puts "too many open files...re-establishing connection"
-              ActiveRecord::Base.connection.disconnect!
-              ActiveRecord::Base.establish_connection({:adapter=>"sqlite3", 
-                :dbfile => "/Users/will/db/pitchfork-reviews.db"})
-            else
-              puts "#{cid} : #{e.class}"
-            end
-          end
+        begin
+          download(cid)
+        rescue Exception => e
+          log_exception(e, cid)
         end
       end
       content_id+=1
     end
-
   end
 end
 
