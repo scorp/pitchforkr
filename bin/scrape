@@ -56,10 +56,8 @@ def save_content(content)
     begin 
       puts "saving #{content[:content_id]} : #{content[:artist]} : #{content[:title]} : #{content[:rating]}"
       Review.create(content)
-    rescue SQLite3::BusyException => e
-      log_exception(e, cid)
     rescue Exception => e
-      log_exception(e, cid)
+      log_exception(e, content[:content_id])
     end
 end
 
@@ -67,7 +65,7 @@ def download_content
   content_id = ARGV[0].to_i || Review.maximum(:id) || 0
   threads = []
   while true
-    if Thread.list.size <= 30
+    if Thread.list.size <= 100
       threads << Thread.new(content_id) do |cid|
         begin
           download(cid)

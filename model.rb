@@ -3,8 +3,13 @@ require "will_paginate"
 
 WillPaginate.enable_activerecord
 
-ActiveRecord::Base.establish_connection({:adapter=>"sqlite3", 
-  :dbfile => "/Users/will/db/pitchfork-reviews.db"})
+ActiveRecord::Base.establish_connection(
+  {:database=>"pitchforkd",
+   :adapter=>"mysql",  
+   :username=>"root",
+   :pool=>50,
+   :wait_timeout=> 10,
+   :host=>"localhost"})
   
 # models
 class Review < ActiveRecord::Base
@@ -17,7 +22,7 @@ unless Review.table_exists?
     t.string    :full_title
     t.string    :artist
     t.string    :title
-    t.string    :imaage_url
+    t.string    :image_url
     t.float     :rating
     t.text      :review
     t.text      :review_summary
