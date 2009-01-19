@@ -63,6 +63,11 @@ a{
   top:4px;
 }
 
+#greatest .rating{
+  left:60px;
+  top:75px;
+}
+
 .odd .rating{
   color:#D200B6;
 }
@@ -88,7 +93,6 @@ a{
 }
 
 #latest {
-  width:350px;
   padding:20px;
   float:left;
 }

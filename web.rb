@@ -92,8 +92,7 @@ __END__
       <img src="<%=r.image_url%>" class="album_art"/>
       <ul>
       <li class="title_artist"><span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%></span><span class="rating"><%=r.rating%></span></li>
-      <li class="review_summary"><%= r.review_summary %>...
-        <a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
+      <li class="review_summary"><a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
       </ul>
     </li>
   <% end %>
