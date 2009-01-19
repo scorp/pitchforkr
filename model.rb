@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'activerecord'
-require 'will_paginate'
+require 'vendor/lib/will_paginate/lib/will_paginate'
 
 WillPaginate.enable_activerecord
 
