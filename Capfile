@@ -23,7 +23,7 @@ server domain, :app, :web
 
 namespace :deploy do
   task :restart do
-    run "cp #{current_path}/../shared/database.yml #{current_path}/database.yml"
+    run "cp #{current_path}/../../shared/database.yml #{current_path}/database.yml"
     run "touch #{current_path}/tmp/restart.txt" 
   end
 end
