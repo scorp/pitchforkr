@@ -17,7 +17,8 @@ end
 
 get "/" do
   o = params[:o]
-  @reviews = Review.find(:all, :limit=>25, :order=>"rating desc")
+  @greatest = Review.find(:all, :limit=>25, :order=>"rating desc")
+  @latest = Review.find(:all, :limit=>25, :order=>"content_id desc")
   erb :index
 end
 
@@ -56,7 +57,7 @@ __END__
   <html>
     <head>
       <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-      <title>pitchforkr</title>
+      <title>pitchforkd</title>
       <link rel="stylesheet" href="/stylesheets/styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
@@ -65,10 +66,24 @@ __END__
   </html>
 
 @@ index
-  <ol class="review_list">  
-  <% @reviews.each_with_index do |r,i| 
+  <ol class="latest review_list">  
+  <% @latest.each_with_index do |r,i| 
     even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
-    <li id="content_<%=r.content_id%>" class="review <%=even_odd%>">
+    <li id="latest_content_<%=r.content_id%>" class="review <%=even_odd%>">
+      <img src="<%=r.image_url%>" class="album_art"/>
+      <ul>
+      <li class="title_artist"><span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%></span><span class="rating"><%=r.rating%></span></li>
+      <li class="review_summary"><%= r.review_summary %>...
+        <a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
+      </ul>
+    </li>
+  <% end %>
+  </ol>
+
+  <ol class="greatest review_list">  
+  <% @greatest.each_with_index do |r,i| 
+    even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
+    <li id="greatest_content_<%=r.content_id%>" class="review <%=even_odd%>">
       <img src="<%=r.image_url%>" class="album_art"/>
       <ul>
       <li class="title_artist"><span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%></span><span class="rating"><%=r.rating%></span></li>
