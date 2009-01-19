@@ -3,7 +3,7 @@ require 'net/http'
 require 'rubygems'
 require 'open-uri'
 require 'model'
-require 'Hpricot'
+require 'hpricot'
 
 BASE_URL = "http://www.pitchforkmedia.com/node/"
 
