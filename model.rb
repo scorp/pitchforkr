@@ -12,7 +12,7 @@ ActiveRecord::Base.establish_connection(
    :username=>"root",
    :pool=>50,
    :wait_timeout=> 10,
-   :host=>"localhost"})
+   :host=>"mysql.thirtymontgomery.com"})
   
 # models
 class Review < ActiveRecord::Base
