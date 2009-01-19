@@ -9,7 +9,8 @@ WillPaginate.enable_activerecord
 ActiveRecord::Base.establish_connection(
   {:database=>"pitchforkd",
    :adapter=>"mysql",  
-   :username=>"root",
+   :username=>"willbailey",
+   :password=>"dogstar8"
    :pool=>50,
    :wait_timeout=> 10,
    :host=>"mysql.thirtymontgomery.com"})
