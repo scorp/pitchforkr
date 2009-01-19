@@ -5,15 +5,7 @@ $:.unshift("vendor/will_paginate/lib")
 
 
 WillPaginate.enable_activerecord
-
-ActiveRecord::Base.establish_connection(
-  {:database=>"pitchforkd",
-   :adapter=>"mysql",  
-   :username=>"willbailey",
-   :password=>"dogstar8",
-   :pool=>50,
-   :wait_timeout=> 10,
-   :host=>"mysql.thirtymontgomery.com"})
+ActiveRecord::Base.establish_connection(YAML.load_file("database.yml"))
   
 # models
 class Review < ActiveRecord::Base
