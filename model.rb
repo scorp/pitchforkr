@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'activerecord'
 require 'vendor/will_paginate/lib/will_paginate'
+$:.unshift("vendor/will_paginate/lib")
+
 
 WillPaginate.enable_activerecord
 
