@@ -10,7 +10,7 @@ ActiveRecord::Base.establish_connection(
   {:database=>"pitchforkd",
    :adapter=>"mysql",  
    :username=>"willbailey",
-   :password=>"dogstar8"
+   :password=>"dogstar8",
    :pool=>50,
    :wait_timeout=> 10,
    :host=>"mysql.thirtymontgomery.com"})
