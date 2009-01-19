@@ -2,7 +2,6 @@ require 'rubygems'
 require 'sinatra'
 require 'model'
 require 'vendor/will_paginate/lib/will_paginate/view_helpers'
-Sinatra::EventContext.send(:include, WillPaginate::ViewHelpers)
 
 def page_list
   current_page = params[:page]
