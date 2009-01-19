@@ -86,3 +86,15 @@ a{
   top:0px;
   left:0px;
 }
+
+#latest {
+  width:350px;
+  padding:20px;
+  float:left;
+}
+
+#greatest {
+  width:350px;
+  padding:20px;
+  float:left;
+}
