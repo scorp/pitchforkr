@@ -66,6 +66,8 @@ __END__
   </html>
 
 @@ index
+  <div id="latest">
+  <h2>Latest</h2>
   <ol class="latest review_list">  
   <% @latest.each_with_index do |r,i| 
     even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
@@ -79,7 +81,10 @@ __END__
     </li>
   <% end %>
   </ol>
-
+  </div>
+  
+  <div id="greatest">
+  <h2>Greatest</h2>
   <ol class="greatest review_list">  
   <% @greatest.each_with_index do |r,i| 
     even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
@@ -93,4 +98,5 @@ __END__
     </li>
   <% end %>
   </ol>
+  </div>
   <div class="page_list"></div>
