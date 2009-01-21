@@ -24,27 +24,28 @@ end
 
 get "/:id" do
   @reviews = [Review.find_by_content_id(params[:id])]
-  erb :index
+
+  erb :listing
 end
 
 get "/pages/:page" do
   @reviews = Review.paginate(:page => params[:page], :order=>"rating desc")
-  erb :index
+  erb :listing
 end
 
 get "/artist/:artist" do
   @reviews = Review.find(:all, :conditions=>["artist like ?", '%' + params[:artist].split(/\s|_|-/).join('%') + '%'], :order=>"rating desc")
-  erb :index
+  erb :listing
 end
 
 get "/album/:album" do
   @reviews = Review.find(:all, :conditions=>["title like ?", '%' + params[:album].split(/\s|_|-/).join('%') + '%'], :order=>"rating desc")
-  erb :index
+  erb :listing
 end
 
 get "/text/:text" do
   @reviews = Review.find(:all, :conditions=>["review like ?", '%' + params[:text].split(/\s|_|-/).join('%') + '%'], :order=>"rating desc")
-  erb :index
+  erb :listing
 end
 
 
@@ -75,6 +76,27 @@ __END__
       } catch(err) {}</script>
     </body>
   </html>
+  
+@@ listing
+  <div id="latest">
+  <ol class="latest review_list">  
+  <% @reviews.each_with_index do |r,i| 
+    even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
+    <li id="latest_content_<%=r.content_id%>" class="review <%=even_odd%>">
+      <img src="<%=r.image_url%>" class="album_art"/>
+      <ul>
+      <li class="title_artist">
+        <div>
+          <span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%>&nbsp;&nbsp;</span><span class="rating"><%=r.rating%></span>
+        </div>
+      </li>
+      <li class="review_summary"><%= r.review_summary %>...
+        <a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
+      </ul>
+    </li>
+  <% end %>
+  </ol>
+  </div>
 
 @@ index
   <div id="latest">

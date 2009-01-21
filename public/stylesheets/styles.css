@@ -97,6 +97,20 @@ a{
   border:5px solid #fff;
 }
 
+#greatest .album_art{
+  height:75px;
+}
+
+#greatest .review ul{
+  min-height:100px;
+  padding:0 0 0 65px;
+}
+
+#greatest li.review{
+  margin-bottom:20px;
+  min-height:100px;
+}
+
 #latest {
   padding:20px;
   float:left;
