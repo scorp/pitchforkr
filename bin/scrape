@@ -64,7 +64,8 @@ end
 def download_content
   content_id = Review.maximum(:content_id) || 0
   threads = []
-  while true
+  started_at = Time.now
+  while started_at > Time.now - 300
     if Thread.list.size <= 100
       threads << Thread.new(content_id) do |cid|
         begin
