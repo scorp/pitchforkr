@@ -1,35 +1,48 @@
 body{
-  font-family:Helvetica, arial, sans-serif;
+  font-family:didot, Georgia;
   font-style:normal;
   margin:0px;
+  background:#DBDCCB;
+  color:#3D3935;
 }
+
+#container{
+  width:920px;
+  margin:auto;
+}
+
+h2{margin:0; padding:0; font-weight:normal; font-variant:small-caps;}
 
 em{font-style:normal;}
 
-ol, ul {
+ol, ul, li {
   list-style: none;
   margin:0px; 
-  padding:10px;
+  padding:0px;
 }
 
 a{
-  color:#D200B6;
+  color:#941A42;
+  text-decoration:none;
+  font-style:italic;
 }
 
 .review_list{
-  max-width:800px;
+  max-width:526px;
   margin:auto;
 }
 
 .review{
-  padding :10px;
+  padding-left :20px;
   position:relative;
   min-height:130px;
-  margin-bottom:20px;
+  margin-bottom:40px;
+  text-align:justify;
 }
 
 .review ul{
-  padding-left:125px;
+  padding:0 0 0 125px;
+  min-height:150px;
 }
 
 .review.odd{
@@ -43,37 +56,28 @@ a{
 
 .title_artist{
   padding-left:30px;
-  font-weight:bold;
   padding-bottom:10px;
+  text-align:left;
 }
 
 .review_summary{
-  font-size:13px;
+  font-size:14px;
   line-height:20px;
   padding-left:30px;
 }
 
 .rating{
-  color:#79E0E6;
-  font-size:46px;
-  font-weight:bold;
-  padding-left:104px;
-  position:absolute;
-  right:4px;
-  top:4px;
-}
-
-#greatest .rating{
-  left:60px;
-  top:75px;
+/*  color:#79E0E6;*/
+  font-style:italic;
+  color:#941A42;
 }
 
 .odd .rating{
-  color:#D200B6;
+/*  color:#D200B6;*/
 }
 
 .page_list {
-  max-width:800px;
+  max-width:526px;
   margin:auto;
   text-align:center;
   font-size:14px;
@@ -90,6 +94,7 @@ a{
   position:absolute;
   top:0px;
   left:0px;
+  border:5px solid #fff;
 }
 
 #latest {
@@ -98,7 +103,7 @@ a{
 }
 
 #greatest {
-  width:350px;
+  width:310px;
   padding:20px;
   float:left;
 }

@@ -61,20 +61,26 @@ __END__
       <link rel="stylesheet" href="/stylesheets/styles.css" type="text/css" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
-      <%= yield %>
+      <div id="container">
+        <%= yield %>
+      </div>
     </body>
   </html>
 
 @@ index
   <div id="latest">
-  <h2>Latest</h2>
+  <h2>latest</h2>
   <ol class="latest review_list">  
   <% @latest.each_with_index do |r,i| 
     even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
     <li id="latest_content_<%=r.content_id%>" class="review <%=even_odd%>">
       <img src="<%=r.image_url%>" class="album_art"/>
       <ul>
-      <li class="title_artist"><span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%></span><span class="rating"><%=r.rating%></span></li>
+      <li class="title_artist">
+        <div>
+          <span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%>&nbsp;&nbsp;</span><span class="rating"><%=r.rating%></span>
+        </div>
+      </li>
       <li class="review_summary"><%= r.review_summary %>...
         <a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
       </ul>
@@ -84,15 +90,19 @@ __END__
   </div>
   
   <div id="greatest">
-  <h2>Greatest</h2>
+  <h2>greatest</h2>
   <ol class="greatest review_list">  
   <% @greatest.each_with_index do |r,i| 
     even_odd = (i + 1)%2 == 0 ? "even" : "odd" %>
     <li id="greatest_content_<%=r.content_id%>" class="review <%=even_odd%>">
       <img src="<%=r.image_url%>" class="album_art"/>
       <ul>
-      <li class="title_artist"><span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%></span><span class="rating"><%=r.rating%></span></li>
-      <li class="review_summary"><a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
+        <li class="title_artist">
+          <div>
+            <span class="title"><%=r.title%></span> : <span class="artist"><%=r.artist%>&nbsp;&nbsp;</span><span class="rating"><%=r.rating%></span>
+          </div>
+        </li>
+        <li class="review_summary"><a href="http://www.pitchforkmedia.com/node/<%=r.content_id%>" target="_blank">[ full review ]</a></li>
       </ul>
     </li>
   <% end %>
