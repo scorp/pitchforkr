@@ -62,7 +62,7 @@ def save_content(content)
 end
 
 def download_content
-  content_id = ARGV[0].to_i || Review.maximum(:id) || 0
+  content_id = Review.maximum(:content_id) || 0
   threads = []
   while true
     if Thread.list.size <= 100
